@@ -1,11 +1,11 @@
 {
-  "name": "vanilla-chat-simulator",
+  "name": "vanilla-fake-chat",
   "version": "0.1.0",
   "author": {
     "name": "Ken Huh",
     "email": "ken@vanillacoding.co"
   },
-  "description": "Chat Simulator using React & Redux",
+  "description": "Fake Chat Application React & Redux",
   "private": true,
   "dependencies": {
     "react": "^16.5.2",
