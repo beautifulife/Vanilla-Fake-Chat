@@ -39,5 +39,5 @@ $ yarn start (or npm start)
 * 인물 사진이 필요한 경우 인터넷에서 자유롭게 구글링하여 사용해주세요.
 * 서버 구현은 필요하지 않습니다. 서버에 데이터를 요청해 받아오는 가상의 메소드를 만들어 사용해주세요.
 * GUI는 큰틀이 변하지 않는 한에서 변화를 주어도 괜찮습니다.
-* React/Redux/React Router을 사용해 SPA(Single Page Application)로 만들어주세요.
+* React/Redux/React Router을 사용해 SPA(Single Page Application)로 만들어주세요. (React Router의 경우, 설치 필요)
 * 화면전환 등 다양한 효과들은 마음껏 보여주셔도 됩니다.
