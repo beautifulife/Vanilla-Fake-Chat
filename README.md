@@ -1,6 +1,6 @@
-# Chat Simulator
+# Fake Chat Application
 
-React & Redux를 이용하여 채팅 기록을 재생할 수 있도록 하는 과제입니다.
+React & Redux를 이용하여 가짜 채팅 어플리케이션을 만들어 보는 과제입니다.
 
 ## Setup
 
