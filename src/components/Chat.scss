@@ -1,0 +1,157 @@
+.Chat {
+  height: 100%;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 71px;
+    font-weight: 800;
+    color: #cdcdd2;
+    background-color: #3e3f4d;
+
+    &__backward {
+      position: absolute;
+      left: 20px;
+      font-weight: 500;
+      color: #929fa6;
+      cursor: pointer;
+    }
+  }
+
+  &__main {
+    overflow: auto;
+    height: calc(100% - 65px - 71px - 30px);
+    padding: 15px 0;
+    background-color: #ebeef1;
+
+    &__item__opponent {
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding: 15px 0;
+      border-bottom: 1px solid #f0f0f0;
+
+      &__profile {
+        position: absolute;
+        top: 0px;
+        left: 19px;
+        z-index: 1;
+        width: 45px;
+        height: 45px;
+        border-radius: 100%;
+        background-image: url(../asset/images/user8_profile.jpg);
+        background-size: cover;
+        background-position: center center;
+      }
+
+      &__message {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        text-align: left;
+        max-width: 200px;
+        margin-left: 42px;
+        padding: 18px 15px;
+        color: #5a595f;
+        border-radius: 5px;
+        background-color: white;
+
+        p {
+          margin-left: 10px;
+          font-size: 0.8rem;
+        }
+
+        span {
+          position: absolute;
+          bottom: 5px ;
+          right: -33px;
+          font-size: 0.6rem;
+          color: #929196c2;
+        }
+      }
+    }
+
+    &__item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      position: relative;
+      padding: 15px 0;
+      border-bottom: 1px solid #f0f0f0;
+
+      &__profile {
+        position: absolute;
+        top: 0px;
+        right: 19px;
+        z-index: 1;
+        width: 45px;
+        height: 45px;
+        border-radius: 100%;
+        background-image: url(../asset/images/user8_profile.jpg);
+        background-size: cover;
+        background-position: center center;
+      }
+
+      &__message {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        text-align: left;
+        max-width: 200px;
+        margin-right: 42px;
+        padding: 18px 15px;
+        color: #5a595f;
+        border-radius: 5px;
+        background-color: white;
+
+        p {
+          margin-right: 10px;
+          font-size: 0.8rem;
+        }
+
+        span {
+          position: absolute;
+          bottom: 5px ;
+          left: -33px;
+          font-size: 0.6rem;
+          color: #929196c2;
+        }
+      }
+    }
+  }
+
+  &__input {
+    height: 65px;
+
+    &__form {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+
+      &__text {
+        flex: 1;
+        padding: 20px;
+        text-align: left;
+        font-size: 1rem;
+        border: none;
+      }
+
+      &__submit {
+        width: 45px;
+        margin: 15px;
+        padding: 10px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 5px;
+        background-image: linear-gradient(#9184fe, #73a6fe);
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+}

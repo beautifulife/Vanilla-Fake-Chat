@@ -1,0 +1,70 @@
+.List {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 71px;
+    font-weight: 800;
+    color: #cdcdd2;
+    letter-spacing: .2rem;
+    background-color: #3e3f4d;
+  }
+
+  &__new {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 71px;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    background-image: linear-gradient(to right, #9184fe, #73a6fe);
+  }
+
+  &__main {
+    overflow: auto;
+    height: 100%;
+
+    &__item {
+      display: flex;
+      height: 94px;
+      border-bottom: 1px solid #f0f0f0;
+
+      &__profile {
+        width: 95px;
+        background-image: url(../asset/images/user8_profile.jpg);
+        background-size: cover;
+        background-position: center center;
+      }
+
+      &__info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: relative;
+        text-align: left;
+        margin-left: 21px;
+
+        p:first-of-type {
+          margin-bottom: 4px;
+          font-weight: bold;
+          color: #424463;
+        }
+
+        p:last-of-type {
+          font-size: 0.8rem;
+          color: #929196;
+        }
+
+        span {
+          position: absolute;
+          top: 13px;
+          right: 15px;
+          font-size: 0.7rem;
+          color: #929196;
+        }
+      }
+    }
+  }
+}
