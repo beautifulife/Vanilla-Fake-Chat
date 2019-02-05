@@ -30,7 +30,6 @@ const makeChatRoomList = (data) => {
 
 const mapStateToProps = (state) => {
   const { appData } = state;
-  console.log(appData);
 
   return {
     chatRoomList: makeChatRoomList(appData)

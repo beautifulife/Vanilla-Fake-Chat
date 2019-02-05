@@ -35,7 +35,7 @@
 
       &__profile {
         position: absolute;
-        top: 0px;
+        top: -3px;
         left: 19px;
         z-index: 1;
         width: 45px;
@@ -53,7 +53,7 @@
         text-align: left;
         max-width: 200px;
         margin-left: 42px;
-        padding: 18px 15px;
+        padding: 13px 15px;
         color: #5a595f;
         border-radius: 5px;
         background-color: white;
@@ -61,12 +61,13 @@
         p {
           margin-left: 10px;
           font-size: 0.8rem;
+          line-height: 1.3rem;
         }
 
         span {
           position: absolute;
-          bottom: 5px ;
-          right: -33px;
+          bottom: 3px ;
+          right: -31px;
           font-size: 0.6rem;
           color: #929196c2;
         }
@@ -83,7 +84,7 @@
 
       &__profile {
         position: absolute;
-        top: 0px;
+        top: -3px;
         right: 19px;
         z-index: 1;
         width: 45px;
@@ -101,7 +102,7 @@
         text-align: left;
         max-width: 200px;
         margin-right: 42px;
-        padding: 18px 15px;
+        padding: 13px 15px;
         color: #5a595f;
         border-radius: 5px;
         background-color: white;
@@ -109,12 +110,13 @@
         p {
           margin-right: 10px;
           font-size: 0.8rem;
+          line-height: 1.3rem;
         }
 
         span {
           position: absolute;
-          bottom: 5px ;
-          left: -33px;
+          bottom: 3px ;
+          left: -31px;
           font-size: 0.6rem;
           color: #929196c2;
         }
@@ -124,6 +126,8 @@
 
   &__input {
     height: 65px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: none;
 
     &__form {
       display: flex;

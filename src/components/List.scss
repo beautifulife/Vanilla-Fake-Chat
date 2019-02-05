@@ -31,6 +31,7 @@
   &__main {
     overflow: auto;
     height: calc(100% - 71px - 71px);
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
 
     &__item {
       display: flex;

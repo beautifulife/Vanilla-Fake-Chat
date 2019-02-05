@@ -16,19 +16,25 @@ class List extends Component {
           lastMessage,
           lastMessageTime
         } = chatRoom;
-
         const userProfileStyle = {
           backgroundImage: `url(../asset/images/${opponentUserProfile}.jpg)`
         };
+        const localMessageTime = `${new Date(lastMessageTime).getHours()}:${new Date(lastMessageTime).getMinutes()}`;
 
         return (
-          <Link to={`/chat/${chatRoomId}`} key={chatRoomId}>
+          <Link
+            to={{
+              pathname: `/chat/${chatRoomId}`,
+              state: { opponentUserName }
+            }}
+            key={chatRoomId}
+          >
             <li className="List__main__item">
               <div style={userProfileStyle} className="List__main__item__profile" />
               <div className="List__main__item__info">
                 <p>{opponentUserName}</p>
                 <p>{lastMessage}</p>
-                <span>{lastMessageTime}</span>
+                <span>{localMessageTime}</span>
               </div>
             </li>
           </Link>

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setChatRoom } from '../actions';
+import { setChatRoom, addMessage } from '../actions';
 
 import Chat from '../components/Chat';
 
@@ -36,7 +36,6 @@ const makeChatRoomData = (data, id) => {
 
 const mapStateToProps = (state) => {
   const { appData, chatRoomId } = state;
-  console.log(appData, chatRoomId);
 
   return {
     chatRoomData: makeChatRoomData(appData, chatRoomId)
@@ -45,11 +44,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => ({
   onInit: (chatRoomId) => {
-    console.log('init', chatRoomId);
     dispatch(setChatRoom(chatRoomId));
   },
-  onSubmit: (inputValue) => {
+  onSubmit: (inputValue, chatRoomId, userId) => {
     console.log('여기는 콘테이너안', inputValue);
+    dispatch(addMessage(inputValue, chatRoomId, userId));
   }
 });
 

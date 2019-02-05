@@ -11,3 +11,11 @@ export const setChatRoom = chatRoomId => ({
   type: Types.SET_CHAT_ROOM,
   chatRoomId,
 });
+
+export const addMessage = (text, chatRoomId, user)  => ({
+  type: Types.ADD_MESSAGE,
+  chatRoomId,
+  user,
+  text,
+  time: new Date().toJSON()
+});
