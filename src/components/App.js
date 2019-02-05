@@ -3,8 +3,8 @@ import './App.scss';
 
 import { BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
 
-import Chat from './Chat';
-import ListContainer from '../containers/List_container';
+import ChatContainer from '../containers/Chat_container';
+import List from './List';
 
 class App extends Component {
   componentDidMount() {
@@ -14,15 +14,15 @@ class App extends Component {
   }
 
   render() {
-    const { chatRoomData } = this.props;
+    const { chatRoomList } = this.props;
 
     return (
       <Router>
         <div className="App">
           <Switch>
             <Redirect exact from="/" to="/list" />
-            <Route path="/list" render={props => <ListContainer {...props} chatRoomData={chatRoomData} />} />
-            <Route path="/chat/:id" render={props => <Chat {...props} chatRoomData={chatRoomData} />} />
+            <Route path="/list" render={props => <List {...props} chatRoomList={chatRoomList} />} />
+            <Route path="/chat/:id" render={props => <ChatContainer {...props} />} />
           </Switch>
         </div>
       </Router>

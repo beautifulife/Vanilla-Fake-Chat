@@ -1,4 +1,6 @@
 .List {
+  height: 100%;
+
   &__header {
     display: flex;
     align-items: center;
@@ -8,6 +10,10 @@
     color: #cdcdd2;
     letter-spacing: .2rem;
     background-color: #3e3f4d;
+
+    span {
+      cursor: pointer;
+    }
   }
 
   &__new {
@@ -19,20 +25,20 @@
     font-weight: 600;
     letter-spacing: .1rem;
     background-image: linear-gradient(to right, #9184fe, #73a6fe);
+    cursor: pointer;
   }
 
   &__main {
     overflow: auto;
-    height: 100%;
+    height: calc(100% - 71px - 71px);
 
     &__item {
       display: flex;
       height: 94px;
-      border-bottom: 1px solid #f0f0f0;
+      cursor: pointer;
 
       &__profile {
         width: 95px;
-        background-image: url(../asset/images/user8_profile.jpg);
         background-size: cover;
         background-position: center center;
       }
@@ -44,7 +50,8 @@
         justify-content: center;
         position: relative;
         text-align: left;
-        margin-left: 21px;
+        padding-left: 21px;
+        border-bottom: 1px solid #f0f0f0;
 
         p:first-of-type {
           margin-bottom: 4px;

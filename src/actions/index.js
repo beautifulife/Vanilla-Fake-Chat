@@ -7,6 +7,7 @@ export const setChatList = data => ({
   messages: data.messages
 });
 
-export const test = () => {
-
-};
+export const setChatRoom = chatRoomId => ({
+  type: Types.SET_CHAT_ROOM,
+  chatRoomId,
+});
