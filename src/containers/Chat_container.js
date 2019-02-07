@@ -1,29 +1,32 @@
 import { connect } from 'react-redux';
-import { setChatRoom, addMessage } from '../actions';
+import { selectChatRoom, addMessage } from '../actions';
 import Chat from '../components/Chat';
 
-const makeChatRoomData = (data, id) => {
+const makechatData = (data, id) => {
   if (!data.rooms || !id.chatRoomId) {
-    return [];
+    return {};
   }
 
-  const roomInfo = data.rooms.byId[id.chatRoomId];
+  const chatRoomInfo = data.rooms.byId[id.chatRoomId];
   const opponentInfo = {
-    id: roomInfo.opponent,
-    name: data.users.byId[roomInfo.opponent].name,
-    profile: data.users.byId[roomInfo.opponent].profile_url
+    id: chatRoomInfo.opponent,
+    name: data.users.byId[chatRoomInfo.opponent].name,
+    profile: data.users.byId[chatRoomInfo.opponent].profile_url
   };
   const userInfo = {
-    id: roomInfo.user,
-    profile: data.users.byId[roomInfo.user].profile_url
+    id: chatRoomInfo.user,
+    profile: data.users.byId[chatRoomInfo.user].profile_url
   };
   const messages = [];
 
-  roomInfo.messages.forEach((messageId) => {
+  chatRoomInfo.messages.forEach((messageId) => {
+    const messageTime = data.messages.byId[messageId].time;
+
     messages.push({
       text: data.messages.byId[messageId].text,
       user: data.messages.byId[messageId].user,
-      time: data.messages.byId[messageId].time
+      date: `${new Date(messageTime).getMonth() + 1}월 ${new Date(messageTime).getDate()}일`,
+      time: `${new Date(messageTime).getHours()}:${new Date(messageTime).getMinutes()}`
     });
   });
 
@@ -35,19 +38,18 @@ const makeChatRoomData = (data, id) => {
 };
 
 const mapStateToProps = (state) => {
-  const { appData, chatRoomId } = state;
+  const { chatRoomList, chatRoomId } = state;
 
   return {
-    chatRoomData: makeChatRoomData(appData, chatRoomId)
+    chatData: makechatData(chatRoomList, chatRoomId)
   };
 };
 
 const mapDispatchToProps = dispatch => ({
   onInit: (chatRoomId) => {
-    dispatch(setChatRoom(chatRoomId));
+    dispatch(selectChatRoom(chatRoomId));
   },
   onSubmit: (inputValue, chatRoomId, userId) => {
-    console.log('여기는 콘테이너안', inputValue);
     dispatch(addMessage(inputValue, chatRoomId, userId));
   }
 });

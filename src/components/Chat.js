@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import './Chat.scss';
-
-import FilterLink from '../containers/FilterLink';
+import AddressLink from '../containers/AddressLink';
 
 class Chat extends Component {
   constructor(props) {
@@ -22,17 +22,17 @@ class Chat extends Component {
   }
 
   scrollToBottom() {
-    this.lastMessage.scrollIntoView({ behavior: 'smooth' });
+    this.lastMessage.scrollIntoView();
   }
 
   handleSubmit(ev) {
     const { inputValue } = this.state;
-    const { onSubmit, chatRoomId, chatRoomData } = this.props;
+    const { onSubmit, chatRoomId, chatData } = this.props;
 
     ev.preventDefault();
 
     if (inputValue.trim()) {
-      onSubmit(inputValue, chatRoomId, chatRoomData.userInfo.id);
+      onSubmit(inputValue, chatRoomId, chatData.userInfo.id);
 
       this.setState({
         inputValue: ''
@@ -47,62 +47,60 @@ class Chat extends Component {
   }
 
   render() {
-    console.log(this.props);
-
     const { inputValue } = this.state;
-    const { chatRoomData } = this.props;
+    const { chatData } = this.props;
 
     const renderChatRoom = () => {
-      const { messages, opponentInfo, userInfo } = chatRoomData;
+      const { messages, opponentInfo, userInfo } = chatData;
+      let previousDate;
 
       if (!messages) {
         return undefined;
       }
 
       return messages.map((message, index) => {
-        const keyIndex = message.text + index.toString();
-        const localMessageTime = `${new Date(message.time).getHours()}:${new Date(message.time).getMinutes()}`;
+        const { text, user, date, time } = message;
+        const keyIndex = text + index.toString();
+        let dateSeperatePoint;
+        let messageOwner;
 
-        if (message.user === userInfo.id) {
-          const userProfileStyle = {
-            backgroundImage: `url(../asset/images/${userInfo.profile}.jpg)`
-          };
-
-          return (
-            <li key={keyIndex} className="Chat__main__item">
-              <div style={userProfileStyle} className="Chat__main__item__profile" />
-              <div className="Chat__main__item__message">
-                <p>{message.text}</p>
-                <span>{localMessageTime}</span>
-              </div>
-            </li>
-          );
+        if (user === userInfo.id) {
+          messageOwner = 'user';
+        } else {
+          messageOwner = 'opponent';
         }
 
-        if (message.user === opponentInfo.id) {
-          const userProfileStyle = {
-            backgroundImage: `url(../asset/images/${opponentInfo.profile}.jpg)`
-          };
+        if (previousDate && previousDate !== date) {
+          dateSeperatePoint = date;
+        }
 
-          return (
-            <li key={keyIndex} className="Chat__main__item__opponent">
-              <div style={userProfileStyle} className="Chat__main__item__opponent__profile" />
-              <div className="Chat__main__item__opponent__message">
-                <p>{message.text}</p>
-                <span>{localMessageTime}</span>
+        previousDate = date;
+
+        const userProfileStyle = {
+          backgroundImage: `url(../asset/images/${messageOwner === 'user' ? userInfo.profile : opponentInfo.profile}.jpg)`
+        };
+
+        return (
+          <Fragment key={keyIndex}>
+            {dateSeperatePoint && (<div className="Chat__main__line"><span>{dateSeperatePoint}</span></div>)}
+            <li className={`Chat__main__item__${messageOwner}`}>
+              <div style={userProfileStyle} className={`Chat__main__item__${messageOwner}__profile`} />
+              <div className={`Chat__main__item__${messageOwner}__message`}>
+                <p>{text}</p>
+                <span>{time}</span>
               </div>
             </li>
-          );
-        }
+          </Fragment>
+        );
       });
     };
 
     return (
       <div className="Chat">
         <div className="Chat__header">
-          <span className="Chat__header__title">{chatRoomData.opponentInfo && chatRoomData.opponentInfo.name}</span>
+          <span className="Chat__header__title">{chatData.opponentInfo && chatData.opponentInfo.name}</span>
           <span className="Chat__header__backward">
-            <FilterLink filter="list">뒤로</FilterLink>
+            <AddressLink address="list"><span>뒤로</span></AddressLink>
           </span>
         </div>
         <div className="Chat__main">
@@ -129,5 +127,16 @@ class Chat extends Component {
     );
   }
 }
+
+Chat.propTypes = {
+  onInit: PropTypes.func.isRequired,
+  chatRoomId: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  chatData: PropTypes.instanceOf(Object)
+};
+
+Chat.defaultProps = {
+  chatData: {}
+};
 
 export default Chat;

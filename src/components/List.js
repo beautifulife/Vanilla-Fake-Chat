@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './List.scss';
-
-import FilterLink from '../containers/FilterLink';
+import AddressLink from '../containers/AddressLink';
 
 class List extends Component {
   render() {
     const { chatRoomList } = this.props;
 
     const renderChatRoomList = () => {
+      chatRoomList.sort((a, b) => {
+        return (new Date(b.lastMessageTime) - new Date(a.lastMessageTime));
+      });
+
       return chatRoomList.map((chatRoom) => {
         const {
           chatRoomId,
           opponentUserName,
           opponentUserProfile,
           lastMessage,
-          lastMessageTime
+          lastMessageLocalTime
         } = chatRoom;
         const userProfileStyle = {
           backgroundImage: `url(../asset/images/${opponentUserProfile}.jpg)`
         };
-        const localMessageTime = `${new Date(lastMessageTime).getHours()}:${new Date(lastMessageTime).getMinutes()}`;
 
         return (
-          <FilterLink
+          <AddressLink
             key={chatRoomId}
-            filter={`chat/${chatRoomId}`}
+            address={`chat/${chatRoomId}`}
             state={opponentUserName}
           >
             <li className="List__main__item">
@@ -33,10 +35,10 @@ class List extends Component {
               <div className="List__main__item__info">
                 <p>{opponentUserName}</p>
                 <p>{lastMessage}</p>
-                <span>{localMessageTime}</span>
+                <span>{lastMessageLocalTime}</span>
               </div>
             </li>
-          </FilterLink>
+          </AddressLink>
         );
       });
     };
@@ -44,9 +46,9 @@ class List extends Component {
     return (
       <div className="List">
         <div className="List__header">
-          <Link to="/">
+          <AddressLink address="">
             <span>CHAT</span>
-          </Link>
+          </AddressLink>
         </div>
         <div className="List__new">
           <span>+ New message</span>
@@ -58,5 +60,9 @@ class List extends Component {
     );
   }
 }
+
+List.propTypes = {
+  chatRoomList: PropTypes.instanceOf(Array).isRequired
+};
 
 export default List;
