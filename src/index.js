@@ -1,11 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { applyMiddleware, createStore } from 'redux';
-import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 import rootReducer from './reducers';
 import './index.scss';
-import AppContainer from './containers/App_container';
+import Root from './components/Root';
 
 const store = createStore(
   rootReducer,
@@ -13,8 +12,6 @@ const store = createStore(
 );
 
 ReactDOM.render(
-  <Provider store={store}>
-    <AppContainer />
-  </Provider>,
+  <Root store={store} />,
   document.getElementById('root')
 );

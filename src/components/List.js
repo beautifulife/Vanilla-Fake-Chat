@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './List.scss';
 
-import { Link } from 'react-router-dom';
+import FilterLink from '../containers/FilterLink';
 
 class List extends Component {
   render() {
@@ -22,12 +23,10 @@ class List extends Component {
         const localMessageTime = `${new Date(lastMessageTime).getHours()}:${new Date(lastMessageTime).getMinutes()}`;
 
         return (
-          <Link
-            to={{
-              pathname: `/chat/${chatRoomId}`,
-              state: { opponentUserName }
-            }}
+          <FilterLink
             key={chatRoomId}
+            filter={`chat/${chatRoomId}`}
+            state={opponentUserName}
           >
             <li className="List__main__item">
               <div style={userProfileStyle} className="List__main__item__profile" />
@@ -37,7 +36,7 @@ class List extends Component {
                 <span>{localMessageTime}</span>
               </div>
             </li>
-          </Link>
+          </FilterLink>
         );
       });
     };

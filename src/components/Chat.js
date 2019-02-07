@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './Chat.scss';
 
-import { Link } from 'react-router-dom';
+import FilterLink from '../containers/FilterLink';
 
 class Chat extends Component {
   constructor(props) {
@@ -12,9 +12,9 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    const { onInit, match } = this.props;
+    const { onInit, chatRoomId } = this.props;
 
-    onInit(match.params.id);
+    onInit(chatRoomId);
   }
 
   componentDidUpdate() {
@@ -27,12 +27,12 @@ class Chat extends Component {
 
   handleSubmit(ev) {
     const { inputValue } = this.state;
-    const { onSubmit, match, chatRoomData } = this.props;
+    const { onSubmit, chatRoomId, chatRoomData } = this.props;
 
     ev.preventDefault();
 
-    if (inputValue) {
-      onSubmit(inputValue, match.params.id, chatRoomData.userInfo.id);
+    if (inputValue.trim()) {
+      onSubmit(inputValue, chatRoomId, chatRoomData.userInfo.id);
 
       this.setState({
         inputValue: ''
@@ -47,8 +47,10 @@ class Chat extends Component {
   }
 
   render() {
+    console.log(this.props);
+
     const { inputValue } = this.state;
-    const { chatRoomData, location } = this.props;
+    const { chatRoomData } = this.props;
 
     const renderChatRoom = () => {
       const { messages, opponentInfo, userInfo } = chatRoomData;
@@ -98,9 +100,9 @@ class Chat extends Component {
     return (
       <div className="Chat">
         <div className="Chat__header">
-          <span className="Chat__header__title">{location.state.opponentUserName}</span>
+          <span className="Chat__header__title">{chatRoomData.opponentInfo && chatRoomData.opponentInfo.name}</span>
           <span className="Chat__header__backward">
-            <Link to="/list">뒤로</Link>
+            <FilterLink filter="list">뒤로</FilterLink>
           </span>
         </div>
         <div className="Chat__main">

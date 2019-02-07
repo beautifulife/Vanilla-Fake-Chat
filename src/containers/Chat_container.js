@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { setChatRoom, addMessage } from '../actions';
-
 import Chat from '../components/Chat';
 
 const makeChatRoomData = (data, id) => {
@@ -11,6 +10,7 @@ const makeChatRoomData = (data, id) => {
   const roomInfo = data.rooms.byId[id.chatRoomId];
   const opponentInfo = {
     id: roomInfo.opponent,
+    name: data.users.byId[roomInfo.opponent].name,
     profile: data.users.byId[roomInfo.opponent].profile_url
   };
   const userInfo = {

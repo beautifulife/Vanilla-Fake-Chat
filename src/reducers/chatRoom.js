@@ -1,9 +1,5 @@
 import * as Types from '../actions/actionTypes';
 
-// const initialState = {
-//   chatRoomId: ''
-// };
-
 const chatRoom = (state = {}, action) => {
   switch (action.type) {
   case Types.SET_CHAT_ROOM:

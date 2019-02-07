@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { setChatList } from '../actions';
-
 import App from '../components/App';
 
 const makeChatRoomList = (data) => {

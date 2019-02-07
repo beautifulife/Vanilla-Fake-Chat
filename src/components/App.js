@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import './App.scss';
-
-import { BrowserRouter as Router, Redirect, Route, Switch} from 'react-router-dom';
-
 import ChatContainer from '../containers/Chat_container';
 import List from './List';
 
@@ -14,18 +11,15 @@ class App extends Component {
   }
 
   render() {
-    const { chatRoomList } = this.props;
+    const { chatRoomList, match } = this.props;
+
+    console.log(match);
 
     return (
-      <Router>
-        <div className="App">
-          <Switch>
-            <Redirect exact from="/" to="/list" />
-            <Route path="/list" render={props => <List {...props} chatRoomList={chatRoomList} />} />
-            <Route path="/chat/:id" render={props => <ChatContainer {...props} />} />
-          </Switch>
-        </div>
-      </Router>
+      <div className="App">
+        {match.params.filter === 'list' && <List chatRoomList={chatRoomList} />}
+        {match.params.filter === 'chat' && <ChatContainer chatRoomId={match.params.chatRoomId} />}
+      </div>
     );
   }
 }
