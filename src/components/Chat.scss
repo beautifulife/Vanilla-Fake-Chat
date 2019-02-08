@@ -38,7 +38,7 @@
         left: 50%;
         transform: translateX(-50%);
         padding: 5px 15px;
-        font-size: 0.8rem;
+        font-size: .8rem;
         color: rgba(0, 0, 0, 0.5);
         background-color: #ebeef1;
       }
@@ -72,14 +72,14 @@
         max-width: 200px;
         margin-left: 42px;
         padding: 13px 15px;
-        color: #5a595f;
         border-radius: 5px;
+        color: #5a595f;
         background-color: white;
 
         p {
           margin-left: 10px;
-          font-size: 0.8rem;
-          line-height: 1.3rem;
+          font-size: .8rem;
+          line-height: .3rem;
         }
 
         span {
@@ -87,7 +87,7 @@
           bottom: 3px ;
           right: -7px;
           transform: translateX(100%);
-          font-size: 0.6rem;
+          font-size: .6rem;
           color: #929196c2;
         }
       }
@@ -122,13 +122,13 @@
         max-width: 200px;
         margin-right: 42px;
         padding: 13px 15px;
-        color: #5a595f;
         border-radius: 5px;
+        color: #5a595f;
         background-color: white;
 
         p {
           margin-right: 10px;
-          font-size: 0.8rem;
+          font-size: .8rem;
           line-height: 1.3rem;
         }
 
@@ -137,7 +137,7 @@
           bottom: 3px ;
           left: -7px;
           transform: translateX(-100%);
-          font-size: 0.6rem;
+          font-size: .6rem;
           color: #929196c2;
         }
       }
@@ -159,18 +159,18 @@
         flex: 1;
         padding: 20px;
         text-align: left;
-        font-size: 1rem;
         border: none;
+        font-size: 1rem;
       }
 
       &__submit {
         width: 45px;
         margin: 15px;
         padding: 10px;
-        font-size: 0.9rem;
+        font-size: .9rem;
         font-weight: 600;
-        color: white;
         border-radius: 5px;
+        color: white;
         background-image: linear-gradient(#9184fe, #73a6fe);
         cursor: pointer;
       }

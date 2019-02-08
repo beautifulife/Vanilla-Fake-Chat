@@ -10,6 +10,8 @@ class Chat extends Component {
       inputValue: ''
     };
     this.lastMessage = React.createRef();
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -34,7 +36,6 @@ class Chat extends Component {
 
     if (inputValue.trim()) {
       onSubmit(inputValue, chatRoomId, chatData.userInfo.id);
-
       this.setState({
         inputValue: ''
       });
@@ -53,16 +54,16 @@ class Chat extends Component {
 
     const renderChatRoom = () => {
       const { messages, opponentInfo, userInfo } = chatData;
-      let previousDate;
+      let previousMessageDate;
 
       if (!messages) {
-        return undefined;
+        return;
       }
 
       return messages.map((message, index) => {
         const { text, user, date, time } = message;
         const keyIndex = text + index.toString();
-        let dateSeperatePoint;
+        let differentDate;
         let messageOwner;
 
         if (user === userInfo.id) {
@@ -71,11 +72,11 @@ class Chat extends Component {
           messageOwner = 'opponent';
         }
 
-        if (previousDate && previousDate !== date) {
-          dateSeperatePoint = date;
+        if (previousMessageDate && previousMessageDate !== date) {
+          differentDate = date;
         }
 
-        previousDate = date;
+        previousMessageDate = date;
 
         const userProfileStyle = {
           backgroundImage: `url(../asset/images/${
@@ -85,9 +86,9 @@ class Chat extends Component {
 
         return (
           <Fragment key={keyIndex}>
-            {dateSeperatePoint && (
+            {differentDate && (
               <div className="Chat__main__line">
-                <span>{dateSeperatePoint}</span>
+                <span>{differentDate}</span>
               </div>
             )}
             <li className={`Chat__main__item__${messageOwner}`}>
@@ -112,26 +113,23 @@ class Chat extends Component {
             {chatData.opponentInfo && chatData.opponentInfo.name}
           </span>
           <span className="Chat__header__backward">
-            <AddressLink address="list">
+            <AddressLink address="/list">
               <span>뒤로</span>
             </AddressLink>
           </span>
         </div>
         <div className="Chat__main">
           {renderChatRoom()}
-          <div
-            className="Chat__main__bottom"
-            ref={this.lastMessage}
-          />
+          <div className="Chat__main__bottom" ref={this.lastMessage} />
         </div>
         <div className="Chat__input">
-          <form className="Chat__input__form" onSubmit={this.handleSubmit.bind(this)}>
+          <form className="Chat__input__form" onSubmit={this.handleSubmit}>
             <input
               type="text"
               value={inputValue}
               placeholder="Type something to send..."
               className="Chat__input__form__text"
-              onChange={this.handleInputChange.bind(this)}
+              onChange={this.handleInputChange}
               autoFocus
             />
             <input type="submit" value="보내기" className="Chat__input__form__submit" />

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const AddressLink = ({ address, children }) => (
-  <NavLink to={`/${address}`}>
+  <NavLink to={`${address}`}>
     {children}
   </NavLink>
 );
