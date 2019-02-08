@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 import logger from 'redux-logger';
-import rootReducer from './reducers';
 import './index.scss';
-import Root from './components/Root';
+import rootReducer from './reducers';
+import RootRouter from './components/RootRouter';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   rootReducer,
-  applyMiddleware(logger)
+  composeEnhancers(applyMiddleware(logger))
 );
 
 ReactDOM.render(
-  <Root store={store} />,
+  <RootRouter store={store} />,
   document.getElementById('root')
 );

@@ -1,25 +1,25 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import AppContainer from '../containers/App_container';
 
-const Root = ({ store }) => (
+const RootRouter = ({ store }) => (
   <Provider store={store}>
     <Router>
       <React.Fragment>
         <Switch>
           <Redirect exact from="/" to="/list" />
-          <Route path="/:filter/:chatRoomId" component={AppContainer} />
-          <Route path="/:filter" component={AppContainer} />
+          <Route exact path="/:address" component={AppContainer} />
+          <Route path="/:address/:chatRoomId" component={AppContainer} />
         </Switch>
       </React.Fragment>
     </Router>
   </Provider>
 );
 
-Root.propTypes = {
-  store: PropTypes.object.isRequired
+RootRouter.propTypes = {
+  store: PropTypes.instanceOf(Object).isRequired
 };
 
-export default Root;
+export default RootRouter;

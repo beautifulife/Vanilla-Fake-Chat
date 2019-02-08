@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './App.scss';
 import ChatContainer from '../containers/Chat_container';
 import List from './List';
+import NotFound from './NotFound';
 
 class App extends Component {
   componentDidMount() {
@@ -13,15 +15,20 @@ class App extends Component {
   render() {
     const { chatRoomList, match } = this.props;
 
-    console.log(match);
-
     return (
       <div className="App">
-        {match.params.filter === 'list' && <List chatRoomList={chatRoomList} />}
-        {match.params.filter === 'chat' && <ChatContainer chatRoomId={match.params.chatRoomId} />}
+        {match.params.address === 'list' && <List chatRoomList={chatRoomList} />}
+        {match.params.address === 'chat' && <ChatContainer chatRoomId={match.params.chatRoomId} />}
+        {match.params.address !== 'list' && match.params.address !== 'chat' && <NotFound />}
       </div>
     );
   }
 }
+
+App.propTypes = {
+  onInit: PropTypes.func.isRequired,
+  chatRoomList: PropTypes.instanceOf(Array).isRequired,
+  match: PropTypes.instanceOf(Object).isRequired
+};
 
 export default App;

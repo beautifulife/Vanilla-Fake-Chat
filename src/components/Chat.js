@@ -9,6 +9,7 @@ class Chat extends Component {
     this.state = {
       inputValue: ''
     };
+    this.lastMessage = React.createRef();
   }
 
   componentDidMount() {
@@ -22,7 +23,7 @@ class Chat extends Component {
   }
 
   scrollToBottom() {
-    this.lastMessage.scrollIntoView();
+    this.lastMessage.current.scrollIntoView();
   }
 
   handleSubmit(ev) {
@@ -77,14 +78,23 @@ class Chat extends Component {
         previousDate = date;
 
         const userProfileStyle = {
-          backgroundImage: `url(../asset/images/${messageOwner === 'user' ? userInfo.profile : opponentInfo.profile}.jpg)`
+          backgroundImage: `url(../asset/images/${
+            messageOwner === 'user' ? userInfo.profile : opponentInfo.profile
+          }.jpg)`
         };
 
         return (
           <Fragment key={keyIndex}>
-            {dateSeperatePoint && (<div className="Chat__main__line"><span>{dateSeperatePoint}</span></div>)}
+            {dateSeperatePoint && (
+              <div className="Chat__main__line">
+                <span>{dateSeperatePoint}</span>
+              </div>
+            )}
             <li className={`Chat__main__item__${messageOwner}`}>
-              <div style={userProfileStyle} className={`Chat__main__item__${messageOwner}__profile`} />
+              <div
+                style={userProfileStyle}
+                className={`Chat__main__item__${messageOwner}__profile`}
+              />
               <div className={`Chat__main__item__${messageOwner}__message`}>
                 <p>{text}</p>
                 <span>{time}</span>
@@ -98,16 +108,20 @@ class Chat extends Component {
     return (
       <div className="Chat">
         <div className="Chat__header">
-          <span className="Chat__header__title">{chatData.opponentInfo && chatData.opponentInfo.name}</span>
+          <span className="Chat__header__title">
+            {chatData.opponentInfo && chatData.opponentInfo.name}
+          </span>
           <span className="Chat__header__backward">
-            <AddressLink address="list"><span>뒤로</span></AddressLink>
+            <AddressLink address="list">
+              <span>뒤로</span>
+            </AddressLink>
           </span>
         </div>
         <div className="Chat__main">
           {renderChatRoom()}
           <div
             className="Chat__main__bottom"
-            ref={(ref) => { this.lastMessage = ref; }}
+            ref={this.lastMessage}
           />
         </div>
         <div className="Chat__input">

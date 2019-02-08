@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import chatRoomList from './chatRoomList';
-import chatRoom from './chatRoom';
+import chatRoomId from './chatRoomId';
 
 export default combineReducers({
-  appData: chatRoomList,
-  chatRoomId: chatRoom
+  chatRoomList,
+  chatRoomId
 });

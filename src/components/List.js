@@ -9,31 +9,27 @@ class List extends Component {
 
     const renderChatRoomList = () => {
       chatRoomList.sort((a, b) => {
-        return (new Date(b.lastMessageTime) - new Date(a.lastMessageTime));
+        return new Date(b.lastMessageTime) - new Date(a.lastMessageTime);
       });
 
       return chatRoomList.map((chatRoom) => {
         const {
           chatRoomId,
-          opponentUserName,
-          opponentUserProfile,
+          opponentName,
+          opponentProfile,
           lastMessage,
           lastMessageLocalTime
         } = chatRoom;
         const userProfileStyle = {
-          backgroundImage: `url(../asset/images/${opponentUserProfile}.jpg)`
+          backgroundImage: `url(../asset/images/${opponentProfile}.jpg)`
         };
 
         return (
-          <AddressLink
-            key={chatRoomId}
-            address={`chat/${chatRoomId}`}
-            state={opponentUserName}
-          >
+          <AddressLink key={chatRoomId} address={`chat/${chatRoomId}`} state={opponentName}>
             <li className="List__main__item">
               <div style={userProfileStyle} className="List__main__item__profile" />
               <div className="List__main__item__info">
-                <p>{opponentUserName}</p>
+                <p>{opponentName}</p>
                 <p>{lastMessage}</p>
                 <span>{lastMessageLocalTime}</span>
               </div>
@@ -53,9 +49,7 @@ class List extends Component {
         <div className="List__new">
           <span>+ New message</span>
         </div>
-        <div className="List__main">
-          {renderChatRoomList()}
-        </div>
+        <div className="List__main">{renderChatRoomList()}</div>
       </div>
     );
   }
