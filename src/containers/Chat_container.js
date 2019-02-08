@@ -25,15 +25,23 @@ const makechatData = (data, id) => {
     messages.push({
       text: data.messages.byId[messageId].text,
       user: data.messages.byId[messageId].user,
-      date: `${new Date(messageTime).getMonth() + 1}월 ${new Date(messageTime).getDate()}일`,
-      time: `${new Date(messageTime).getHours()}:${new Date(messageTime).getMinutes()}`
+      date: new Date(messageTime).toLocaleDateString('ko-KR', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }),
+      time: new Date(messageTime).toLocaleTimeString('ko-KR', {
+        hour: 'numeric',
+        minute: 'numeric'
+      })
     });
   });
 
   return {
     opponentInfo,
     userInfo,
-    messages,
+    messages
   };
 };
 

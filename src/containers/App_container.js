@@ -10,27 +10,31 @@ const makeChatRoomList = (data) => {
   const chatRoomList = [];
 
   data.rooms.allIds.forEach((roomId) => {
-    const opponentUserInfo = data.users.byId[data.rooms.byId[roomId].opponent];
+    const opponentInfo = data.users.byId[data.rooms.byId[roomId].opponent];
     const messages = data.rooms.byId[roomId].messages;
-    const lastMessageId = messages[messages.length - 1];
-    const lastMessageInfo = data.messages.byId[lastMessageId];
+    const lastMessageInfo = data.messages.byId[messages[messages.length - 1]];
     const lastMessageTime = lastMessageInfo.time;
-    const dateDiff = new Date().getDate() - new Date(lastMessageTime).getDate();
     let lastMessageLocalTime;
 
-    if (dateDiff === 0) {
-      lastMessageLocalTime = `${new Date(lastMessageTime).getHours()}:${new Date(lastMessageTime).getMinutes()}`;
+    if (new Date().getDate() - new Date(lastMessageTime).getDate() === 0) {
+      lastMessageLocalTime = new Date(lastMessageTime).toLocaleTimeString('ko-KR', {
+        hour: 'numeric',
+        minute: 'numeric'
+      });
     } else {
-      lastMessageLocalTime = `${new Date(lastMessageTime).getMonth() + 1}월 ${new Date(lastMessageTime).getDate()}일`;
+      lastMessageLocalTime = new Date(lastMessageTime).toLocaleDateString('ko-KR', {
+        month: 'long',
+        day: 'numeric'
+      });
     }
 
     chatRoomList.push({
       chatRoomId: roomId,
-      opponentUserName: opponentUserInfo.name,
-      opponentUserProfile: opponentUserInfo.profile_url,
+      opponentName: opponentInfo.name,
+      opponentProfile: opponentInfo.profile_url,
       lastMessage: lastMessageInfo.text,
       lastMessageTime,
-      lastMessageLocalTime,
+      lastMessageLocalTime
     });
   });
 
